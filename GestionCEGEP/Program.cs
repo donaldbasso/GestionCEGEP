@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using GestionCEGEP.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<GestionCEGEPContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("GestionCEGEPContext") ?? throw new InvalidOperationException("Connection string 'GestionCEGEPContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
